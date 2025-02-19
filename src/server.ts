@@ -1,8 +1,9 @@
 import { fastify } from "fastify"
 import { fastifyCors } from "@fastify/cors"
-import { validatorCompiler, serializerCompiler, ZodTypeProvider } from "fastify-type-provider-zod"
+import { validatorCompiler, serializerCompiler, ZodTypeProvider, jsonSchemaTransform } from "fastify-type-provider-zod"
 import { z } from "zod"
-
+import { fastifySwagger } from "@fastify/swagger"
+import { fastifySwaggerUi } from "@fastify/swagger-ui"
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -13,6 +14,19 @@ app.register(fastifyCors, {
 	origin: true // "http://localhost:3000"
 })
 
+app.register(fastifySwagger, {
+	openapi: {
+		info: {
+			title: "NLW-connect",
+			version: "0.0.1"
+		}
+	},
+	transform: jsonSchemaTransform
+})
+
+app.register(fastifySwaggerUi, {
+	routePrefix: "/docs"
+})
 
 app.post("/subscriptions", {
 	schema: {
