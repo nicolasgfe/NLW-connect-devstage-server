@@ -12,6 +12,7 @@ import { env } from './env'
 import { subscribeToEventRoute } from './routes/subscribe-to-event-route'
 import { accessInviteLinkRoute } from './routes/access-invite-link-route'
 import { getSubscriberInviteClicksRoutes } from './routes/get-subscribe-invite-clicks-route'
+import { getSubscriberInviteCountsRoutes } from './routes/get-subscribe-invite-counts-route'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -39,6 +40,7 @@ app.register(fastifySwaggerUi, {
 app.register(subscribeToEventRoute)
 app.register(accessInviteLinkRoute)
 app.register(getSubscriberInviteClicksRoutes)
+app.register(getSubscriberInviteCountsRoutes)
 
 app
   .listen({
