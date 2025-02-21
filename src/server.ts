@@ -9,10 +9,12 @@ import {
   validatorCompiler,
 } from 'fastify-type-provider-zod'
 import { env } from './env'
-import { subscribeToEventRoute } from './routes/subscribe-to-event-route'
 import { accessInviteLinkRoute } from './routes/access-invite-link-route'
+import { getRankingRoute } from './routes/get-ranking-route'
 import { getSubscriberInviteClicksRoutes } from './routes/get-subscribe-invite-clicks-route'
 import { getSubscriberInviteCountsRoutes } from './routes/get-subscribe-invite-counts-route'
+import { getSubscriberRankingPositionRoutes } from './routes/get-subscriber-ranking-position'
+import { subscribeToEventRoute } from './routes/subscribe-to-event-route'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -41,6 +43,8 @@ app.register(subscribeToEventRoute)
 app.register(accessInviteLinkRoute)
 app.register(getSubscriberInviteClicksRoutes)
 app.register(getSubscriberInviteCountsRoutes)
+app.register(getSubscriberRankingPositionRoutes)
+app.register(getRankingRoute)
 
 app
   .listen({
